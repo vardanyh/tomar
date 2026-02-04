@@ -1,0 +1,2487 @@
+#include "common.ch"
+#include "inkey.ch"
+
+static Static1, Static2:= .F., Static3, Static4, Static5, Static6, ;
+   Static7, Static8, Static9, Static10
+static Static11:= {}
+static Static12:= ""
+
+********************************
+procedure SHAHE97
+
+   ram1:= "∞∞∞∞∞∞∞∞∞"
+   @  0,  0 clear
+   ccolor1:= "G+/B+,Y+/W,,,N/W"
+   ccolor2:= "W+/g"
+   ccolor3:= "G+/B"
+   ccolor4:= "R+/G"
+   ccolor5:= "R+/W+"
+   set color to (ccolor1)
+   private tn[1000], prim[1000], dni[7], dy[13], darm[13], mhul[13], ;
+      marm[13], rej1, nbase
+   private op, ve, t1, tom, tbl[20, 8], y, m, d, dned, kdarm, klet1, ;
+      tomar, dned1, probl, nton
+   private mmarm, cuc[19, 8], mt, dt, zat[19], wtiv, mz, dz, mzt, ;
+      dzt, mes, den, nkar, pz, pzz
+   private grton[10], nstr, vstr, mpr, ost, zat[2, 19], dztn, mztn
+   private cor1000[5], cor100[10], cor10[10], cor01[10]
+   select 1
+   use MONTHUL
+   select 2
+   use MONTARM
+   select 3
+   use RAFIK
+   select 4
+   use SHZATIK
+   select 5
+   use SHARAIC
+   dy[1]:= 0
+   dy[2]:= 31
+   dy[3]:= 59
+   dy[4]:= 90
+   dy[5]:= 120
+   dy[6]:= 151
+   dy[7]:= 181
+   dy[8]:= 212
+   dy[9]:= 243
+   dy[10]:= 273
+   dy[11]:= 304
+   dy[12]:= 334
+   dy[13]:= 365
+   dni[1]:= "úïÔÅùï    "
+   dni[2]:= "àÔùØÛ≠ÅÉëï"
+   dni[3]:= "àÔâ˜≠ÅÉëï "
+   dni[4]:= "·ØÔâ˜≠ÅÉëï"
+   dni[5]:= "ûï´Ö≠ÅÉëï "
+   dni[6]:= "ÆÛÔÉÅë    "
+   dni[7]:= "¨ÅÉÅë     "
+   y:= Year(Date())
+   tarb:= 0
+   select 1
+   use monthul
+   for i:= 1 to 12
+      goto i
+      f1:= FieldName(1)
+      mhul[i]:= &f1
+   next
+   select 2
+   use montarm
+   for i:= 1 to 13
+      goto i
+      f1:= FieldName(1)
+      marm[i]:= &f1
+   next
+   select 3
+   use rafik
+   goto 671
+   a1:= FieldName(2)
+   a2:= &a1
+   if (a2 = "ûïß")
+   else
+      return
+   endif
+   goto 1
+   for j:= 1 to 670
+      tn[j]:= Space(100)
+      prim[j]:= Space(100)
+   next
+   j:= 0
+   do while (!EOF())
+      j:= j + 1
+      if (j < 671)
+         tn[j]:= ton
+         prim[j]:= primech
+      endif
+      skip 
+   enddo
+   select 4
+   use SHZATIK
+   for ost:= 1 to 19
+      goto ost
+      mz1:= FieldName(1)
+      zat[1][ost]:= &mz1
+      dz1:= FieldName(2)
+      zat[2][ost]:= &dz1
+   next
+   run bitmap.exe echma.pcx
+   op:= 1
+   ve:= 2
+   tomar:= 1
+   for m1:= 1 to 100
+      set color to (ccolor1)
+      menu1()
+      if (rej1 == 1)
+         menupr()
+         probl:= 1
+         probl1()
+      endif
+      if (rej1 == 2)
+         menu2()
+         do case
+         case nbase = 1
+            tonanv()
+         case nbase = 2
+            harc1()
+            d:= 1
+            orac()
+         case nbase = 3
+            pz:= 1
+            zatkiorer()
+         case nbase = 4
+            pz:= 49
+            zatkiorer()
+         case nbase = 5
+            pz:= 99
+            zatkiorer()
+         case nbase = 6
+            pz:= 2
+            zatkiorer()
+         case nbase = 7
+            pz:= 3
+            zatkiorer()
+         case nbase = 8
+            pz:= 4
+            zatkiorer()
+         endcase
+      else
+         if (rej1 == 3)
+            menu3()
+            if (ve == 1)
+            else
+            endif
+         endif
+         if (rej1 == 4)
+            mprintb()
+            if (mpr == 1)
+               printb()
+            elseif (mpr == 3)
+               durak()
+            endif
+         endif
+         if (rej1 == 6)
+            return
+         endif
+      endif
+   next
+   InKey(0)
+   return
+
+********************************
+procedure MENU1
+
+   @  0,  0, 24, 79 box "’Õ∏≥æÕ‘≥" + Space(1)
+   set color to w+/r
+   set wrap on
+   @  1, 11 prompt "Problem"
+   @  1, 21 prompt "Base   "
+   @  1, 31 prompt "Options"
+   @  1, 41 prompt "Print  "
+   @  1, 51 prompt "Help   "
+   @  1, 61 prompt "Exit   "
+   menu to rej1
+   return
+
+********************************
+procedure MENUPR
+
+   set color to (ccolor2)
+   set wrap on
+   @  2, 11 prompt " ÏØ´ÅÒØÛ©Ò-ìÅßÅ´ÅùÅÒØÛ©Ò   "
+   @  3, 11 prompt " ÏØ´ÅÒØÛ©Ò                 "
+   menu to probl
+   return
+
+********************************
+procedure MENU2
+
+   set color to w+/g
+   set wrap on
+   @  2, 21 prompt " ÏØ´âÔï Å´ÎÅ´ØÛß´âÔè       "
+   @  3, 21 prompt " ¯ÔÅÒØÛ©Ò                  "
+   @  4, 21 prompt " äÅÌùï ˘ÔâÔè               "
+   @  5, 21 prompt " ûØÖâÖÅóÈÌ©Å´ ˘ÔâÔè        "
+   @  6, 21 prompt " ÍÅÔáÅÎÅÁï ˘ÔâÔè           "
+   @  7, 21 prompt " ÙØôßÅ´ ÄÈÌÎÅõÅõ´ï ˘ÔâÔè   "
+   @  8, 21 prompt " ËØÛÔÉ òÅ·ï ÌØ´ï ˘ÔâÔè     "
+   @  9, 21 prompt " ûïÈ´ÅùÅßØÛÌï ˘ÔâÔè        "
+   menu to nbase
+   return
+
+********************************
+procedure CALEND
+
+   hularm()
+   dned1:= dned - 1
+   tabl()
+   return
+
+********************************
+function __GETCLASS
+
+   return "GET"
+
+********************************
+function __GETBLOCK
+
+   return qself()[1]
+
+********************************
+procedure MENU2A
+
+   set color to w+/g
+   private m2[3]
+   m2[1]:= "ÏØ´âÔï Å´ÎÅ´ØÛß´âÔè    "
+   m2[2]:= "ÄßïÈ´âÔï Å´ÎÅ´ØÛß´âÔè  "
+   m2[3]:= "‚ÅÌß. Ìâ£âùØÛë©ØÛ´´âÔ  "
+   menuchoice:= achoice(2, 21, 4, 43, m2)
+   return
+
+********************************
+procedure MENU3
+
+   set color to W+/g
+   set wrap on
+   @  2, 31 prompt "Base (V or E)  >>"
+   @  3, 31 prompt "ÏØßÅÔè         >>"
+   menu to op
+   if (op == 1)
+      set color to W+/r
+      set wrap on
+      @  2, 46 prompt "View"
+      @  3, 46 prompt "Edit"
+      menu to ve
+   endif
+   if (op == 2)
+      set wrap on
+      @  2, 46 prompt " ûï´ "
+      @  3, 46 prompt " ™ØÔ "
+      menu to tomar
+   endif
+   return
+
+********************************
+procedure MPRINTB
+
+   set color to W+/g
+   set wrap on
+   @  2, 41 prompt "ÏØ´âÔï Å´ÎÅ´ØÛß´âÔè           "
+   @  3, 41 prompt "ÏØ´âÔï ÅßÈÅëÎâÔï üÅßÅÔìâ˜´âÔè "
+   @  4, 41 prompt "                              "
+   menu to mpr
+   return
+
+********************************
+procedure GETREADER(Arg1)
+
+   if (getprevali(Arg1))
+      Arg1:setfocus()
+      do while (Arg1:exitstate() == 0)
+         if (Arg1:typeout())
+            Arg1:exitstate(5)
+         endif
+         do while (Arg1:exitstate() == 0)
+            getapplyke(Arg1, InKey(0))
+         enddo
+         if (!getpostval(Arg1))
+            Arg1:exitstate(0)
+         endif
+      enddo
+      Arg1:killfocus()
+   endif
+   return
+
+********************************
+function __SETFORMA(Arg1)
+
+   Static1:= iif(ISBLOCK(Arg1), Arg1, Nil)
+   return Nil
+
+********************************
+procedure TABL
+
+   y1:= y
+   m1:= m
+   d1:= d
+   prv:= y1 - Int(y1 / 4) * 4
+   l:= 1
+   dmax:= dy[m1 + 1] - dy[m1]
+   if (prv = 0 .AND. m1 = 2 .AND. d1 > 9)
+      dmax:= dmax + 1
+   endif
+   for iiff:= 1 to 2
+      for jj:= d1 to dmax
+         raz1:= kdarm - (klet1 - 1) * 365
+         c1:= dned1 + l - 1
+         if (c1 == 0)
+            c1:= 7
+         endif
+         c1:= c1 - Int((c1 - 1) / 7) * 7
+         tbl[l][1]:= y1
+         tbl[l][2]:= m1
+         tbl[l][3]:= jj
+         tbl[l][4]:= c1
+         tbl[l][8]:= c1
+         mes1:= Int((raz1 + l - 1) / 30) + 1
+         den1:= raz1 + l - 1 - (mes1 - 1) * 30 + 1
+         if (mes1 = 13 .AND. den1 = 6)
+            klet1:= klet1 + 1
+            mes1:= 1
+            den1:= 1
+         endif
+         tbl[l][5]:= klet1 - 544
+         if (tbl[l][5] < 1)
+            tbl[l][5]:= Nil
+         endif
+         tbl[l][6]:= mes1
+         tbl[l][7]:= den1
+         l:= l + 1
+         if (l > 19)
+            return
+         endif
+      next
+      m1:= m1 + 1
+      d1:= 1
+      if (m1 > 12)
+         m1:= 1
+         y1:= y1 + 1
+      endif
+   next
+   y:= y1
+   m:= m1
+   d:= d1
+   return
+
+********************************
+procedure HULARM
+
+   kl:= y - 9
+   kv:= Int(kl / 4)
+   prv:= y - Int(y / 4) * 4
+   if (prv > 0)
+      prv:= 1
+   endif
+   if (m > 2 .AND. prv = 0)
+      kv:= kv + 1
+   endif
+   kd:= kl * 365 + kv + dy[m] + d + 1
+   tomar()
+   kd1:= kd + 1 - tom
+   dned:= kd1 - Int(kd1 / 7) * 7 + 1
+   kdarm:= kd1 + 35
+   klet:= Int(kdarm / 365)
+   raz:= kdarm - klet * 365
+   mes:= Int(raz / 30) + 1
+   den:= raz - (mes - 1) * 30 + 1
+   klet1:= klet + 1
+   return
+
+********************************
+function __GETSETNA(Arg1)
+
+   return qself()[7]:= Arg1
+
+********************************
+function __GETSETPI(Arg1)
+
+   return qself()[3]:= Arg1
+
+********************************
+function __GETSETPB(Arg1)
+
+   return qself()[4]:= Arg1
+
+********************************
+function __GETSETPR(Arg1)
+
+   return qself()[5]:= Arg1
+
+********************************
+function __GETSETCA(Arg1)
+
+   return qself()[6]:= Arg1
+
+********************************
+function __GETSETEX(Arg1)
+
+   return qself()[9]:= Arg1
+
+********************************
+procedure TOMAR
+
+   tom:= 0
+   t1:= 0
+   if (tomar == 2)
+      if (y > 1582)
+         t1:= 1
+      endif
+      if (y = 1582 .AND. m > 10)
+         t1:= 2
+      endif
+      if (y = 1582 .AND. m = 10 .AND. d > 5)
+         t1:= 3
+      endif
+      if (y > 1700)
+         t1:= 4
+      endif
+      if (y = 1700 .AND. m > 2)
+         t1:= 5
+      endif
+      if (y > 1800)
+         t1:= 6
+      endif
+      if (y = 1800 .AND. m > 2)
+         t1:= 7
+      endif
+      if (y > 1900)
+         t1:= 8
+      endif
+      if (y = 1900 .AND. m > 2)
+         t1:= 9
+      endif
+      if (y > 2000)
+         t1:= 10
+      endif
+      if (y = 2000 .AND. m > 2)
+         t1:= 11
+      endif
+      if (y > 2100)
+         t1:= 12
+      endif
+      if (y = 2100 .AND. m > 2)
+         t1:= 13
+      endif
+      if (y > 2200)
+         t1:= 14
+      endif
+      if (y = 2200 .AND. m > 2)
+         t1:= 15
+      endif
+      if (t1 = 1 .OR. t1 = 2 .OR. t1 = 3)
+         tom:= 10
+      endif
+      if (t1 = 4 .OR. t1 = 5)
+         tom:= 11
+      endif
+      if (t1 = 6 .OR. t1 = 7)
+         tom:= 12
+      endif
+      if (t1 = 8 .OR. t1 = 9)
+         tom:= 13
+      endif
+      if (t1 = 10 .OR. t1 = 11)
+         tom:= 13
+      endif
+      if (t1 = 12 .OR. t1 = 13)
+         tom:= 14
+      endif
+      if (t1 = 14 .OR. t1 = 15)
+         tom:= 15
+      endif
+   endif
+   return
+
+********************************
+procedure HARC1
+
+   b176:= "∞∞∞∞∞∞∞∞∞"
+   @  9, 20 clear to 17, 60
+   set color to g+/b
+   @  8, 17, 16, 57 box b176
+   @  8, 17 to 16, 57 double
+   set color to W+/g
+   y:= 1111
+   m:= 1
+   @ 10, 20 say "Æ¸Ô ëÎÅùÅ´ïÒ â˜ ÒÅ´ùÅ´ØÛß" get y
+   read
+   @ 12, 20 say "Æ¸Ô ÅßÈÎÅ´ïÒ â˜ ÒÅ´ùÅ´ØÛß" get m
+   read
+   return
+
+********************************
+procedure __APPINIT
+
+   public getlist:= {}
+   return
+
+********************************
+procedure SHAPORAC
+
+   @  0,  0 clear
+   if (shap == 1)
+      if (pz > 0)
+         @  0, 18 say "¨ÄÓíÄúÄ™ ÏÆ™î ûÄ®Æ àÍ ûÆÚñ®Ä™ ûÄ¶ÄÓíàˆ™àÓé"
+      else
+         @  0, 20 say " Ä™¨ÄÓí ÏÆ™î ûÄ®Æ àÍ ûÆÚñ®Ä™ äÆÚÑÄûàÊ™àÓé"
+      endif
+      @  2,  6 say "ÏØ´ï Å´ÎÅ´ØÛßè`"
+      ft:= tn[nton]
+      ft1:= SubStr(ft, 1, 36)
+      ft2:= SubStr(ft, 37, 36)
+      ft3:= SubStr(ft, 73, 29)
+      @  2, 25 say ft1
+      @  3, 25 say ft2
+      @  4, 25 say ft3
+   endif
+   @ vstr,  0, nstr, 79 box "…Õª∫ºÕ»∫" + Space(1)
+   @ vstr + 2,  1, vstr + 2, 79 box "⁄ƒø≥Ÿƒ¿≥"
+   @ vstr + 4,  1, vstr + 4, 79 box "⁄ƒø≥Ÿƒ¿≥"
+   @ vstr + 1, 38, nstr - 1, 38 box "⁄ƒø≥Ÿƒ¿≥"
+   @ vstr + 2,  0 say "«"
+   @ vstr + 2, 79 say "∂"
+   @ vstr + 4,  0 say "«"
+   @ vstr + 4, 79 say "∂"
+   @ vstr, 38 say "—"
+   @ vstr + 2, 38 say "≈"
+   @ vstr + 4, 38 say "≈"
+   @ nstr, 38 say "œ"
+   if (tomar == 1)
+      @ vstr + 1, 10 say "ûØÛó©Å´ (üï´) ÌØßÅÔØÎ"
+   else
+      @ vstr + 1, 10 say "ÑÔïÖØÔ©Å´ (´ØÔ) ÌØßÅÔØÎ"
+   endif
+   @ vstr + 1, 45 say "ûÅ©ùÅùÅ´ ≠ÅÔìÅùÅ´ ÌØßÅÔØÎ"
+   set color to (ccolor2)
+   @ vstr + 3,  1 say " ÏÅÔï´    ÄßïÈè     ÄßÈÅëïÎè  ¨ÅÉ.˘Ôè"
+   @ vstr + 3, 39 say " ÏÅÔï´    ÄßïÈè     ÄßÈÅëïÎè  ¨ÅÉ.˘Ôè"
+   return
+
+********************************
+function __GETBUFFE
+
+   return iif(Len(qself()) == 13, qself()[12], Nil)
+
+********************************
+function __GETORIGI
+
+   return iif(Len(qself()) == 13, qself()[13], Nil)
+
+********************************
+function __GETEXITS
+
+   return qself()[9]
+
+********************************
+function __GETREADE
+
+   return qself()[10]
+
+********************************
+function __GETSETBL(Arg1)
+
+   return qself()[1]:= Arg1
+
+********************************
+procedure ORAC
+
+   vstr:= 0
+   nstr:= 24
+   shap:= 0
+   shaporac()
+   y0:= y
+   m0:= m
+   d0:= d
+   for jo:= 1 to 1000
+      calend()
+      for l:= 1 to 19
+         for j:= 1 to 8
+            @ l + 4, 2 + (j - 1) * 10 say "    "
+            if (tbl[l][j] != Nil)
+               @ l + 4, 2 + (j - 1) * 10 say LTrim(Str(tbl[l][j]))
+            endif
+         next
+      next
+      y1:= tbl[1][1]
+      m1:= tbl[1][2]
+      d1:= tbl[1][3]
+      y2:= tbl[19][1]
+      m2:= tbl[19][2]
+      d2:= tbl[19][3]
+      if (y2 = 2100 .AND. d2 > 15)
+         y:= y0
+         m:= m0
+         d:= d0
+      endif
+      InKey(0)
+      if (LastKey() == K_ESC)
+         exit
+      endif
+      if (LastKey() == K_PGDN)
+         y:= y2
+         m:= m2
+         d:= d2
+         y3:= y1
+         m3:= m1
+         d3:= d1
+      endif
+      if (LastKey() == K_PGUP)
+         y:= y3
+         m:= m3
+         d:= d3
+      endif
+   next
+   return
+
+********************************
+procedure PZ11
+
+   prv:= 0
+   if (y - Int(y / 4) * 4 > 0)
+      prv:= 1
+   endif
+   select 5
+   use SHARAIC
+   nzap:= (nton - 13) * 70
+   for jjz:= 1 to 69 step 2
+      if (prv == 1)
+         goto jjz + nzap
+      else
+         goto jjz + nzap + 1
+      endif
+      zam1:= FieldName(1)
+      zam2:= &zam1
+      zor1:= FieldName(2)
+      zor2:= &zor1
+      mztn:= 0
+      dztn:= 0
+      if (zam2 = mz .AND. zor2 = dz)
+         tam1:= FieldName(3)
+         tor1:= FieldName(4)
+         mztn:= &tam1
+         dztn:= &tor1
+         exit
+      endif
+   next
+   return
+
+********************************
+function __GETTODEC
+
+   local Local1
+   if (Len(qself()) == 13)
+      if (qself():clear())
+         qself():delend()
+      endif
+      qself():reform()
+      qself():pos(qself():decpos())
+      qself():changed(.T.)
+      if (qself():untransfor() == 0 .AND. qself():minus())
+         qself():backspace()
+         qself():overstrike("-")
+      endif
+      qself():display()
+   endif
+   return qself()
+
+********************************
+function READEXIT(Arg1)
+
+   return Set(_SET_EXIT, Arg1)
+
+********************************
+function READINSERT(Arg1)
+
+   return Set(_SET_INSERT, Arg1)
+
+********************************
+procedure TONANV
+
+   @  0,  0, 24, 79 box "…Õª∫ºÕ»∫" + Space(1)
+   @  1, 42, 23, 42 box "⁄ƒø≥Ÿƒ¿≥"
+   @  2,  1,  2, 78 box "⁄ƒø≥Ÿƒ¿≥"
+   @  0, 42 say "—"
+   @  2, 42 say "≈"
+   @ 24, 42 say "œ"
+   @  1, 15 say "ÏØ´ï Å´ÎÅ´ØÛßè"
+   @  1, 55 say "öÅ´ØëØÛë©ØÛ´"
+   select 3
+   use RAFIK
+   jmax:= LastRec()
+   j0:= 0
+   for jj:= 1 to 1000
+      if (LastKey() == K_UP)
+         j0:= j0 - 1
+         if (j0 < 0)
+            j0:= 0
+         endif
+      endif
+      if (LastKey() == K_DOWN)
+         j0:= j0 + 1
+         if (j0 > jmax - 7)
+            j0:= jmax - 7
+         endif
+      endif
+      if (LastKey() == K_PGDN)
+         j0:= j0 + 7
+         if (j0 > jmax - 7)
+            j0:= jmax - 7
+         endif
+      endif
+      if (LastKey() == K_PGUP)
+         j0:= j0 - 7
+         if (j0 < 0)
+            j0:= 0
+         endif
+      endif
+      j1:= 2
+      if (LastKey() == K_ESC)
+         exit
+      endif
+      for j:= 1 to 7
+         jtek:= j + j0
+         if (jtek < 671)
+            ft:= tn[jtek]
+            ft1:= SubStr(ft, 1, 36)
+            ft2:= SubStr(ft, 37, 36)
+            ft3:= SubStr(ft, 73, 29)
+            @ j1 + 1,  1 say "    "
+            @ j1 + 1,  1 say LTrim(Str(jtek))
+            @ j1 + 1,  6 say ft1
+            @ j1 + 2,  6 say ft2
+            @ j1 + 3,  6 say ft3
+            pt:= prim[jtek]
+            pt1:= SubStr(pt, 1, 36)
+            pt2:= SubStr(pt, 37, 36)
+            pt3:= SubStr(pt, 73, 36)
+            @ j1 + 1, 43 say pt1
+            @ j1 + 2, 43 say pt2
+            @ j1 + 3, 43 say pt3
+            j1:= j1 + 3
+         endif
+      next
+      InKey(0)
+   next
+   return
+
+********************************
+function __GETSETBU(Arg1)
+
+   return iif(Len(qself()) == 13, qself()[12]:= Arg1, Arg1)
+
+********************************
+function __GETSETRE(Arg1)
+
+   return qself()[10]:= Arg1
+
+********************************
+function __GETUNDO
+
+   if (Len(qself()) == 13)
+      qself():varput(qself()[13])
+      qself():reset()
+      qself():changed(.F.)
+   endif
+   return qself()
+
+********************************
+function UPDATED
+
+   return Static2
+
+********************************
+procedure TONANV2
+
+   @  0,  0, 24, 79 box "…Õª∫ºÕ»∫" + Space(1)
+   @  1, 42, 23, 42 box "⁄ƒø≥Ÿƒ¿≥"
+   @  2,  1,  2, 78 box "⁄ƒø≥Ÿƒ¿≥"
+   @  0, 42 say "—"
+   @  2, 42 say "≈"
+   @ 24, 42 say "œ"
+   @  1, 15 say "ÏØ´ï Å´ÎÅ´ØÛßè"
+   @  1, 55 say "öÅ´ØëØÛë©ØÛ´"
+   select 3
+   use rafik
+   jmax:= LastRec()
+   j0:= 0
+   for jj:= 1 to 10000
+      if (LastKey() == K_PGUP)
+         j0:= j0 - 7
+         if (j0 < 0)
+            j0:= 0
+         endif
+      endif
+      if (LastKey() == K_UP)
+         j0:= j0 - 1
+         if (j0 < 0)
+            j0:= 0
+         endif
+      endif
+      if (LastKey() == K_DOWN)
+         j0:= j0 + 1
+         if (j0 > jmax - 7)
+            j0:= jmax - 7
+         endif
+      endif
+      if (LastKey() == K_PGDN)
+         j0:= j0 + 7
+         if (j0 > jmax - 7)
+            j0:= jmax - 7
+         endif
+      endif
+      j1:= 2
+      set wrap on
+      set color to (ccolor2)
+      for j:= 1 to 7
+         jtek:= j + j0
+         ft:= tn[jtek]
+         ft1:= SubStr(ft, 1, 36)
+         ft2:= SubStr(ft, 37, 36)
+         ft3:= SubStr(ft, 73, 29)
+         @ j1 + 1,  1 say "    "
+         set color to R+/g
+         @ j1 + 1,  1 prompt LTrim(Str(jtek))
+         set color to (ccolor2)
+         @ j1 + 1,  6 say ft1
+         @ j1 + 2,  6 say ft2
+         @ j1 + 3,  6 say ft3
+         pt:= prim[jtek]
+         pt1:= SubStr(pt, 1, 36)
+         pt2:= SubStr(pt, 37, 36)
+         pt3:= SubStr(pt, 73, 36)
+         @ j1 + 1, 43 say pt1
+         @ j1 + 2, 43 say pt2
+         @ j1 + 3, 43 say pt3
+         j1:= j1 + 3
+      next
+      if (jj == 1)
+         save screen to e1
+         set color to (ccolor3)
+         @  6, 23, 12, 58 box "⁄ƒø≥Ÿƒ¿≥" + Space(1)
+         @  7, 24 say "        Ï Æ ™ Ä  Æ Ú ®  "
+         @  9, 24 say "†âã üâÌÅ˜Ô˜ÔØ£ ÌØ´´ è´ÌÔâóØÛ üÅßÅÔ"
+         @ 10, 24 say "        Èâ£ßâ˜ ØÔ˛ç ÈÌâ£,"
+         @ 11, 24 say " Å©´ØÛüâÌ˛` PgUp ˛ PgDn ÈÌâ£´âÔè"
+         InKey(3)
+         restore screen from e1
+         set color to (ccolor2)
+      endif
+      set color to R+/g
+      menu to nton
+      nton:= jtek - 7 + nton
+      if (LastKey() = K_ENTER .OR. LastKey() = K_ESC)
+         exit
+      endif
+   next
+   grton[1]:= 1
+   grton[2]:= 345
+   grton[3]:= 394
+   grton[4]:= 528
+   grton[5]:= 635
+   grton[6]:= 664
+   pz:= 0
+   for jgr:= 1 to 5
+      if (nton >= grton[jgr] .AND. nton < grton[jgr + 1])
+         pz:= jgr
+      endif
+   next
+   if (nton >= 13 .AND. nton <= 55)
+      pz:= 11
+   endif
+   if (nton >= 391 .AND. nton <= 393)
+      pz:= 21
+   endif
+   if (nton >= 523 .AND. nton <= 527)
+      pz:= 31
+   endif
+   if (nton >= 618 .AND. nton <= 634)
+      pz:= 41
+   endif
+   if (nton > 634 .AND. nton < 664)
+      pz:= 0
+   endif
+   if (nton > 663)
+      save screen to e3
+      set color to (ccolor3)
+      @  6, 23, 12, 58 box "⁄ƒø≥Ÿƒ¿≥" + Space(1)
+      @  8, 27 say "   Ä©È ëÎï ÌÅù ØÔ˛ç ÌØ´   "
+      @  9, 27 say "      ÅÔ°Å´ÅÖÔÎÅõ ·ç      "
+      @ 10, 27 say "    Èâ£ßâ˜ ØÔ˛ç ÈÌâ£,    "
+      @ 11, 27 say " Å©´ØÛüâÌ˛ è´ÌÔâ˜ Å©ó ÌØ´ "
+      InKey(3)
+      restore screen from e3
+      set color to (ccolor2)
+   else
+      select 3
+      use RAFIK
+      goto nton
+      mt1:= FieldName(4)
+      mt:= &mt1
+      dt1:= FieldName(5)
+      dt:= &dt1
+      if (mt == 0)
+         tiv1:= FieldName(8)
+         wtiv:= &tiv1
+      endif
+      return
+   endif
+
+********************************
+procedure SURB
+
+   m:= 9
+   d:= 11
+   calend()
+   mzt:= 9
+   if (tbl[1][4] > 1)
+      dzt:= tbl[1][3] + 8 - tbl[1][4]
+   else
+      dzt:= tbl[1][3]
+   endif
+   dzt:= dy[9] + dzt + wtiv
+   for i:= 1 to 11
+      if (dzt > dy[i] .AND. dzt <= dy[i + 1])
+         mzt:= i
+      endif
+   next
+   dzt:= dzt - dy[mzt]
+   return
+
+********************************
+procedure HISNAK
+
+   m:= 11
+   d:= 15
+   calend()
+   mzt:= 11
+   if (tbl[1][4] > 1)
+      dzt:= tbl[1][3] + 8 - tbl[1][4]
+   else
+      dzt:= tbl[1][3]
+   endif
+   dzt:= dy[11] + dzt + wtiv
+   for i:= 1 to 11
+      if (dzt > dy[i] .AND. dzt <= dy[i + 1])
+         mzt:= i
+      endif
+   next
+   dzt:= dzt - dy[mzt]
+   return
+
+********************************
+procedure DURAK
+
+   @ 10, 10 say "ÜØÛ˜ ïÈùÅ„â¸È ØÛãØÛß â˜ Ì„âó ßØÁÅÒÎÅõ ÌØ´âÔï ÒØÛÒÅùè"
+   InKey(0)
+   if (LastKey() == 97)
+      InKey(0)
+      if (LastKey() == 106)
+         InKey(0)
+         if (LastKey() == 119)
+            @ 11, 10 say "AJW"
+            select 3
+            use rafik
+            goto 671
+            a1:= "xelq"
+            replace code with a1
+            InKey(0)
+         endif
+      endif
+   endif
+   return
+
+********************************
+function READMODAL(Arg1)
+
+   local Local1, Local2, Local3
+   if (ISBLOCK(Static1))
+      eval(Static1)
+   endif
+   if (Empty(Arg1))
+      SetPos(MaxRow() - 1, 0)
+      return .F.
+   endif
+   Local3:= cleargetsy()
+   Static9:= procname(1)
+   Static10:= procline(1)
+   Local2:= settle(Arg1, 0)
+   do while (Local2 != 0)
+      Local1:= Arg1[Local2]
+      postactive(Local1)
+      if (ISBLOCK(Local1:reader()))
+         eval(Local1:reader(), Local1)
+      else
+         getreader(Local1)
+      endif
+      Local2:= settle(Arg1, Local2)
+   enddo
+   restoreget(Local3)
+   SetPos(MaxRow() - 1, 0)
+   return Static2
+
+********************************
+function GETACTIVE(Arg1)
+
+   local Local1:= Static8
+   if (PCount() > 0)
+      Static8:= Arg1
+   endif
+   return Local1
+
+********************************
+procedure PROBL1
+
+   for jt:= 1 to 100
+      for ii:= 1 to 19
+         for jj:= 1 to 8
+            tbl[ii][jj]:= Nil
+            cuc[ii][jj]:= Nil
+         next
+      next
+      ppz:= 0
+      tonanv2()
+      if (nton > 663)
+         return
+      endif
+      if (LastKey() == K_ESC)
+         return
+      endif
+      @  0,  0 clear to 24, 79
+      set color to (ccolor3)
+      @  0,  0, 24, 79 box "…Õª∫ºÕ»∫" + Space(1)
+      save screen to ram1
+      set color to (ccolor2)
+      @  2, 21,  8, 58 box "…Õª∫ºÕ»∫" + Space(1)
+      @  2, 25 say " ÜØÛ˜ è´ÌÔâó â˜ üâÌ˛©Åó ÌØ´è` "
+      if (nton > 0)
+         ft:= LTrim(tn[nton])
+         @  4, 22 say SubStr(ft, 1, 36)
+         @  5, 22 say SubStr(ft, 37, 36)
+         @  6, 22 say SubStr(ft, 73, 29)
+         save screen to kadr1
+         set color to (ccolor5)
+         @ 10, 19, 13, 60 box "…Õª∫ºÕ»∫" + Space(1)
+         if (mt > 0)
+            @ 11, 21 say "Ä©È ÌØ´è ´≠ÎØÛß ç Åßâ´ ÌÅÔï ´ØÛ©´ ˘Ôè`"
+            @ 12, 27 say mhul[mt]
+            @ 12, 37 say dt
+            @ 12, 39 say "-ï´"
+         else
+            @ 11, 21 say "Ä©È ÌØ´è ´≠ÎØÛß ç ≠ÅÔìÅùÅ´ ÌØßÅÔØÎ`"
+            if (pz = 1 .OR. pz = 11)
+               @ 12, 29 say "ùÅôÎÅõ ãÅÌùï ˘ÔÎÅ´ïÒ"
+            else
+               if (pz = 2 .OR. pz = 21)
+                  @ 12, 21 say "ùÅôÎÅõ ÙØôßÅ´ ÄÈÌÎÅõÅõ´ï ˘ÔÎÅ´ïÒ"
+               endif
+               if (pz = 3 .OR. pz = 31)
+                  @ 12, 21 say "ùÅôÎÅõ ËØÛÔÉ òÅ·ï ˘ÔÎÅ´ïÒ"
+               endif
+               if (pz = 4 .OR. pz = 41)
+                  @ 12, 21 say "ùÅôÎÅõ ûïÈ´ÅùÅßØÛÌï ˘ÔÎÅ´ïÒ"
+               endif
+            endif
+            if (pz = 11 .OR. pz = 21 .OR. pz = 31 .OR. pz = 41 .OR. ;
+                  nton = 152)
+               @ 15, 22 say " (ÌØ´ï ùÅÌÅÔßÅ´ ˘ÔâÔè ˘Ôï´Å·Åı ·â´) "
+               ppz:= 1
+            endif
+         endif
+         set color to (ccolor3)
+         InKey(0)
+         @  0,  0 clear
+         restore screen from kadr1
+         set color to (ccolor5)
+         @ 10, 14, 16, 64 box "…Õª∫ºÕ»∫" + Space(1)
+         @ 12, 16 say ;
+            "Ä©È ÌØ´ï ùÅÌÅÔßÅ´ ÅßÈÅëïÎè ÜØÛ˜ ùÅÔØ£ â˜ ïßÅ´Åó."
+         @ 13, 19 say "Å) ûØÛó©Å´ ˘ÔÅÒØÛ©ÒØÎ (üï´ ùÅß ´ØÔ ÌØßÅÔØÎ)"
+         @ 14, 19 say "É) ûÅ©ØÒ ≠ÅÔìÅùÅ´ ˘ÔÅÒØÛ©ÒØÎ"
+         ya:= 9
+         exit
+      else
+      endif
+   next
+   if (mt > 0)
+      pz:= 0
+      m:= mt
+      d:= dt
+   endif
+   if (pz != 11 .AND. pz != 21 .AND. pz != 31 .AND. pz != 41 .AND. ;
+         ppz = 0)
+      set color to (ccolor2)
+      @ 16, 23 say "     é´ÌÔâ˜ ˘ÔÅÒØÛ©Òï ÌâÈÅùè    "
+      set wrap on
+      @ 18, 20 prompt "ûØÛó©Å´ ˘ÔÅÒØÛ©Ò"
+      @ 18, 40 prompt "ûÅ©ØÒ ˘ÔÅÒØÛ©Ò  "
+      menu to hh
+      @  0,  0 clear
+      set color to (ccolor3)
+   else
+      hh:= 1
+   endif
+   restore screen from kadr1
+   if (ppz == 1)
+      hh:= 1
+      probl:= 2
+   endif
+   if (hh == 2)
+      set color to (ccolor2)
+      @  8, 26 say "   é´ÌÔâ˜ üÅ©ØÒ ÅßïÈè...  "
+      @  9, 35, 23, 44 box "…Õª∫ºÕ»∫" + Space(1)
+      set wrap on
+      for ia:= 1 to 13
+         @ 9 + ia, 36 prompt marm[ia]
+      next
+      menu to mmarm
+      @ 11, 57 say "..˛ ÅßÈÅëïÎè"
+      @ 12, 57, 23, 68 box "…Õª∫ºÕ»∫" + Space(1)
+      set wrap on
+      jmx:= 3
+      if (mmarm == 13)
+         jmx:= 1
+      endif
+      for j:= 1 to jmx
+         for i:= 1 to 10
+            if (mmarm = 13 .AND. i > 5)
+            else
+               @ 12 + i, 58 + (j - 1) * 3 prompt LTrim(Str(i + (j - ;
+                  1) * 10))
+            endif
+         next
+      next
+      menu to da
+      set color to (ccolor3)
+      y:= ya
+      ym:= 2100
+      m:= mt
+      d:= dt
+      @ 15,  8 say "ò´áÔØÛß âß È„ÅÈâó,"
+      @ 17,  8 say "ı´ÌÔØÛß âß..."
+      if (pz <= 1)
+         if (pz == 1)
+            zatik()
+         endif
+         m:= mt
+         d:= dt
+      else
+         if (pz == 2)
+            astvac()
+         endif
+         if (pz == 3)
+            surb()
+         endif
+         if (pz == 4)
+            hisnak()
+         endif
+         m:= mzt
+         d:= dzt
+      endif
+      calend()
+      m:= mt
+      d:= dt
+      l1:= 1
+      for jc:= 1 to 10000
+         if (pz == 1)
+            zatik()
+            m:= mzt
+            d:= dzt
+         else
+            if (pz == 2)
+               astvac()
+            elseif (pz == 3)
+               surb()
+            elseif (pz == 4)
+               hisnak()
+            endif
+            m:= mzt
+            d:= dzt
+         endif
+         if (pz == 0)
+            m:= mt
+            d:= dt
+         endif
+         calend()
+         mtt:= mt
+         dtt:= dt
+         if (pz >= 1 .AND. pz <= 4)
+            mtt:= mzt
+            dtt:= dzt
+         endif
+         if (tbl[1][6] = mmarm .AND. tbl[1][7] = da)
+            if (tbl[1][2] = mtt .AND. tbl[1][3] = dtt)
+               ym:= tbl[1][1] + 150
+               for jj:= 1 to 8
+                  cuc[l1][jj]:= tbl[1][jj]
+               next
+               l1:= l1 + 1
+               l0:= 4
+               if (pz >= 1 .AND. pz <= 4)
+                  l0:= 8
+               endif
+               if (l1 > l0)
+                  exit
+               endif
+            endif
+         endif
+         y:= y + 1
+         if (y > ym)
+            exit
+         endif
+      next
+   else
+      l1:= 1
+      set color to (ccolor2)
+      if (probl == 1)
+         @ 13,  3 say "  é´ÌÔâ˜ üÅÔ©ØÛÔÅß©Åùè...  "
+         @ 14,  7, 22, 23 box "…Õª∫ºÕ»∫" + Space(1)
+         set wrap on
+         for j:= 1 to 3
+            for i:= 1 to 7
+               @ 14 + i, 8 + (j - 1) * 5 prompt LTrim(Str((i + (j - ;
+                  1) * 7 - 1) * 100))
+            next
+         next
+         menu to ya
+         ya:= (ya - 1) * 100
+         if (ya == 0)
+            ya:= 9
+         endif
+         if (mt == 0)
+            @  9, 28 say "   ...üØÛó©Å´ ÅßïÈè...  "
+            @ 10, 33, 23, 44 box "…Õª∫ºÕ»∫" + Space(1)
+            set wrap on
+            for ih:= 1 to 12
+               @ 10 + ih, 34 prompt mhul[ih]
+            next
+            menu to mmhul
+            @ 11, 57 say "...˛ ÅßÈÅëïÎè"
+            @ 12, 57, 23, 70 box "…Õª∫ºÕ»∫" + Space(1)
+            set wrap on
+            jmx:= 4
+            if (mmhul = 2 .OR. mmhul = 4 .OR. mmhul = 6 .OR. mmhul = ;
+                  9 .OR. mmhul = 11)
+               jmx:= 3
+            endif
+            for j:= 1 to jmx
+               for i:= 1 to 10
+                  if (j = 4 .AND. i > 1)
+                  elseif (mmhul = 2 .AND. j = 3 .AND. i > 9)
+                  else
+                     @ 12 + i, 58 + (j - 1) * 3 prompt LTrim(Str(i + ;
+                        (j - 1) * 10))
+                  endif
+               next
+            next
+            menu to dh
+         else
+            mmhul:= mt
+            dh:= dt
+         endif
+      else
+         y:= 1111
+         @ 16, 23 say "  é´ÌÔâ˜ üØÛó©Å´ ÌÅÔâëïÎè   " get y
+         read
+         if (pz == 0)
+            m:= mt
+            d:= dt
+         else
+            dztn:= 0
+            mztn:= 0
+            wtiv:= 0
+            if (pz = 1 .OR. pz = 11)
+               zatik()
+               if (pz == 11)
+                  pz11()
+               endif
+               if (nton == 152)
+                  select 4
+                  use SHZATIK
+                  goto ost
+                  ost1:= FieldName(1)
+                  mzt:= &ost1
+                  ost1:= FieldName(2)
+                  dzt:= &ost1
+               endif
+            endif
+            if (pz = 2 .OR. pz = 21)
+               astvac()
+               if (pz == 21)
+                  pz21()
+               endif
+            endif
+            if (pz = 3 .OR. pz = 31)
+               surb()
+               if (pz == 31)
+                  pz31()
+               endif
+            endif
+            if (pz = 4 .OR. pz = 41)
+               hisnak()
+               if (pz == 41)
+                  pz41()
+               endif
+            endif
+            m:= mztn
+            d:= dztn
+            tarb:= 0
+            if (ppz = 1 .AND. dztn = 0)
+               if (nton != 152)
+                  @ 16, 20 say ;
+                     " ÏØ´ï ˘Ô´ Å´ØÔØ≠ ç                     "
+                  @ 17, 20 say "                            "
+                  @ 17, 20 say " é´ÌÔâ˜   "
+                  @ 17, 28 say LTrim(Str(nton))
+                  @ 17, 31 say "-Ôá ÌØ´ï Å©´ ÌÅÔÉâÔÅù´âÔè,  "
+                  @ 18, 20 say ;
+                     " ØÔØ´˜ „ÅÔØÛ´ÅùØÛß â´ + ´≠Å´è          "
+                  InKey(0)
+               else
+                  m:= mzt
+                  d:= dzt
+                  calend()
+                  for jj:= 1 to 8
+                     cuc[1][jj]:= tbl[1][jj]
+                  next
+               endif
+               tarb:= 1
+            else
+               m:= mztn
+               d:= dztn
+            endif
+         endif
+         if (tarb == 0)
+            calend()
+         endif
+         for jj:= 1 to 8
+            cuc[1][jj]:= tbl[1][jj]
+         next
+      endif
+      if (probl == 1)
+         for y:= ya to 2100
+            if (nton == 152)
+               exit
+            endif
+            if (pz == 0)
+               m:= mt
+               d:= dt
+            else
+               if (pz == 1)
+                  zatik()
+               endif
+               if (pz == 2)
+                  astvac()
+               endif
+               if (pz == 3)
+                  surb()
+               endif
+               if (pz == 4)
+                  hisnak()
+               endif
+               m:= mzt
+               d:= dzt
+            endif
+            if (m = mmhul .AND. d = dh)
+               calend()
+               for jj:= 1 to 8
+                  cuc[l1][jj]:= tbl[1][jj]
+               next
+               l1:= l1 + 1
+               if (l1 > 14)
+                  exit
+               endif
+            endif
+         next
+      endif
+   endif
+   set color to (ccolor3)
+   @  0,  0 clear
+   vstr:= 5
+   nstr:= vstr + l1 + 5
+   if (nstr > 24)
+      nstr:= 24
+   endif
+   set color to (ccolor2)
+   shap:= 1
+   shaporac()
+   for ii:= 1 to nstr - 5
+      if (cuc[ii][1] = Nil)
+      else
+         for jj:= 1 to 8
+            @ vstr + 4 + ii, 2 + (jj - 1) * 10 say "    "
+            if (cuc[ii][jj] != Nil)
+               @ vstr + 4 + ii, 2 + (jj - 1) * 10 say ;
+                  LTrim(Str(cuc[ii][jj]))
+            endif
+         next
+      endif
+   next
+   InKey(0)
+   return
+
+********************************
+procedure PZ21
+
+   prv:= 0
+   if (y - Int(y / 4) * 4 > 0)
+      prv:= 1
+   endif
+   select 5
+   use SHARAIC
+   nzap:= (nton - 349) * 70
+   @  2, 10 say mzt
+   @  3, 10 say dzt
+   InKey(0)
+   for jjz:= 1 to 69 step 2
+      if (prv == 1)
+         goto jjz + nzap
+      else
+         goto jjz + nzap + 1
+      endif
+      zam1:= FieldName(1)
+      zam2:= &zam1
+      zor1:= FieldName(2)
+      zor2:= &zor1
+      mztn:= 0
+      dztn:= 0
+      if (zam2 = mzt .AND. zor2 = dzt)
+         tam1:= FieldName(3)
+         tor1:= FieldName(4)
+         mztn:= &tam1
+         dztn:= &tor1
+         exit
+      endif
+   next
+   return
+
+********************************
+function GETNEW(Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
+
+   local Local1[10]
+   __toget(Local1)
+   Local1:row(Arg1)
+   Local1:col(Arg2)
+   Local1[1]:= Arg3
+   Local1[7]:= iif(Arg4 != Nil, Arg4, "")
+   Local1[3]:= Arg5
+   if (Arg6 != Nil)
+      Local1:colorspec(Arg6)
+   else
+      Local1:colorspec(.T.)
+   endif
+   return Local1
+
+********************************
+function __GETHASFO
+
+   return Len(qself()) == 13
+
+********************************
+function __GETNAME
+
+   return qself()[7]
+
+********************************
+function __GETPICTU
+
+   return qself()[3]
+
+********************************
+procedure ZATIK
+
+   ost:= y - Int(y / 19) * 19 - 1
+   if (tomar == 2)
+      tomar()
+      ost:= y - Int((y + 1) / 19) * 19 + 1
+   endif
+   if (ost < 1)
+      ost:= ost + 19
+   endif
+   mz:= zat[1][ost]
+   dz:= zat[2][ost]
+   if (tomar == 2)
+      correct()
+      haz:= Int(y / 1000)
+      yc1:= y - 1000 * haz
+      har:= Int(yc1 / 100)
+      yc2:= yc1 - 100 * har
+      tas:= Int(yc2 / 10)
+      miav:= yc2 - 10 * tas
+      cor:= cor1000[haz + 1] + cor100[har + 1] + cor10[tas + 1] + ;
+         cor01[miav + 1]
+      cc0:= 9.5
+      if (mz == 3)
+         cc0:= 9.5
+      else
+         cc0:= 7.9
+      endif
+      cc1:= 0
+      ic1:= y - 4 * Int(y / 4)
+      if (ic1 == 1)
+         cc1:= 0.2
+      endif
+      if (ic1 == 2)
+         cc1:= 0.5
+      endif
+      if (ic1 == 3)
+         cc1:= 0.8
+      endif
+      cor:= cor + cc0 + cc1 + tom
+      cor1:= cor
+      if (cor > 29.5 .AND. cor <= 59.1)
+         cor1:= cor1 - 29.5
+      endif
+      if (cor > 59.1 .AND. cor <= 88.6)
+         cor1:= cor1 - 59.1
+      endif
+      if (cor > 88.6 .AND. cor <= 118.1)
+         cor1:= cor1 - 88.6
+      endif
+      if (cor > 118.1)
+         cor1:= cor1 - 118.1
+      endif
+      dz:= Int(cor1 + 0.5)
+   endif
+   m:= mz
+   d:= dz
+   hularm()
+   dned1:= dned - 1
+   c1:= dned1
+   if (c1 == 0)
+      c1:= 7
+   endif
+   c1:= c1 - Int((c1 - 1) / 7) * 7
+   if (c1 == 1)
+      dz:= dz + 7
+   else
+      dz:= dz + 8 - c1
+   endif
+   if (dz > 31)
+      dz:= dz - 31
+      mz:= mz + 1
+   endif
+   dzt:= dy[mz] + dz + wtiv
+   prv:= y - Int(y / 4) * 4
+   if (prv = 0 .AND. dzt < 60)
+      dzt:= dzt + 1
+   endif
+   i0:= 4
+   for i:= 1 to 11
+      if (dzt > dy[i] .AND. dzt <= dy[i + 1])
+         mzt:= i
+      endif
+   next
+   dzt:= dzt - dy[mzt]
+   mt:= 4
+   dt:= 18
+   return
+
+********************************
+procedure PZ31
+
+   prv:= 0
+   if (y - Int(y / 4) * 4 > 0)
+      prv:= 1
+   endif
+   select 5
+   use SHARAIC
+   nzap:= (nton - 478) * 70
+   for jjz:= 1 to 69 step 2
+      if (prv == 1)
+         goto jjz + nzap
+      else
+         goto jjz + nzap + 1
+      endif
+      zam1:= FieldName(1)
+      zam2:= &zam1
+      zor1:= FieldName(2)
+      zor2:= &zor1
+      mztn:= 0
+      dztn:= 0
+      if (zam2 = mzt .AND. zor2 = dzt)
+         tam1:= FieldName(3)
+         tor1:= FieldName(4)
+         mztn:= &tam1
+         dztn:= &tor1
+         exit
+      endif
+   next
+   return
+
+********************************
+procedure PZ41
+
+   prv:= 0
+   if (y - Int(y / 4) * 4 > 0)
+      prv:= 1
+   endif
+   select 5
+   use SHARAIC
+   nzap:= (nton - 567) * 70
+   for jjz:= 1 to 69
+      if (prv == 1)
+         goto jjz + nzap
+      else
+         goto jjz + nzap + 1
+      endif
+      zam1:= FieldName(1)
+      zam2:= &zam1
+      zor1:= FieldName(2)
+      zor2:= &zor1
+      mztn:= 0
+      dztn:= 0
+      if (zam2 = mzt .AND. zor2 = dzt)
+         tam1:= FieldName(3)
+         tor1:= FieldName(4)
+         mztn:= &tam1
+         dztn:= &tor1
+         exit
+      endif
+   next
+   return
+
+********************************
+procedure ASTVAC
+
+   m:= 8
+   d:= 12
+   calend()
+   mzt:= 8
+   if (tbl[1][4] > 1)
+      dzt:= tbl[1][3] + 8 - tbl[1][4]
+   else
+      dzt:= tbl[1][3]
+   endif
+   dzt:= dy[8] + dzt + wtiv
+   for i:= 1 to 11
+      if (dzt > dy[i] .AND. dzt <= dy[i + 1])
+         mzt:= i
+      endif
+   next
+   dzt:= dzt - dy[mzt]
+   return
+
+********************************
+function __GETBADDA
+
+   local Local1
+   if ((Local1:= qself():untransfor(), Len(qself()) == 13 .AND. ;
+         qself():type() == "D" .AND. Local1 == CToD("") .AND. ;
+         qself()[12] != Transform(Local1, qself()[3])))
+      return .T.
+   endif
+   return .F.
+
+********************************
+function __GETDWLEF
+
+   qself():wordleft()
+   qself():delwordrig()
+   return qself()
+
+********************************
+procedure __KILLREAD
+
+   Static3:= .T.
+   return
+
+********************************
+procedure ZATKIORER
+
+   y2:= Space(5)
+   y2:= 1111
+   @ 16, 20 say "Æ¸Ô ëÎÅùÅ´ïÒ â˜ ÒÅ´ùÅ´ØÛß" get y2
+   read
+   set color to (ccolor3)
+   @  0,  0 clear
+   @  1,  1, 24, 79 box "…Õª∫ºÕ»∫" + Space(1)
+   if (pz == 1)
+      @  1, 25 say "  äÅÌùï ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (pz == 2)
+      @  1, 20 say "  ÙØôßÅ´ ÄÈÌÎÅõÅõ´ï ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (pz == 3)
+      @  1, 20 say "  ËØÛÔÉ òÅ·ï ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (pz == 4)
+      @  1, 22 say "  ûïÈ´ÅùÅßØÛÌï ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (pz == 49)
+      @  1, 22 say "  ûØÖâÖÅóÈÌ©Å´ ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (pz == 99)
+      @  1, 23 say "  ÍÅÔáÅÎÅÁï ˘ÔâÔ´ èÈÌ ÌÅÔï´âÔï  "
+   endif
+   if (tomar == 1)
+      @  2,  3 say "ûï´ ÌØßÅÔØÎ"
+   else
+      @  2,  3 say "™ØÔ ÌØßÅÔØÎ"
+   endif
+   @  2, 27,  2, 50 box "⁄ƒø≥Ÿƒ¿≥" + Space(1)
+   @  2, 40 say "¬"
+   @  2, 57 say "ûÅ©ØÒ ≠ÅÔìÅùÅ´ ÌØßÅÔØÎ"
+   @  3,  2 say " ÏÅÔï´       ÄßïÈè        ÄßÈÅëïÎè"
+   @  3, 42 say " ÏÅÔï´       ÄßïÈè        ÄßÈÅëïÎè"
+   @  4,  2,  4, 78 box "…Õª∫ºÕ»∫" + Space(1)
+   @  4,  1 say "Ã"
+   @  4, 79 say "π"
+   @  5, 40, 23, 40 box "⁄ƒø≥Ÿƒ¿≥" + Space(1)
+   @  3, 40 say "≥"
+   @  4, 40 say "ÿ"
+   @ 24, 40 say "œ"
+   wtiv:= 0
+   nn:= 19
+   j1:= 0
+   jk:= 1
+   jmax:= Int((2324 - y2) / 19)
+   yp:= y
+   y0:= y2
+   for jkl:= 1 to 1000
+      y0:= y2 + (jk - 1) * nn
+      ymax:= y0 + nn
+      for y:= y0 to ymax - 1
+         if (ymax > 2324)
+            ymax:= ymax - nn
+            y0:= y0 - nn
+            exit
+         endif
+         if (pz <= 1)
+            zatik()
+         else
+            if (pz == 2)
+               astvac()
+            endif
+            if (pz == 3)
+               surb()
+            endif
+            if (pz == 4)
+               hisnak()
+            endif
+            if (pz == 99)
+               wtiv:= 98
+               zatik()
+            endif
+            if (pz == 49)
+               wtiv:= 49
+               zatik()
+            endif
+            mz:= mzt
+            dz:= dzt
+         endif
+         m:= mz
+         d:= dz
+         hularm()
+         j1:= j1 + 1
+         @ 4 + j1,  2 say "                                     "
+         @ 4 + j1, 42 say "                                     "
+         @ 4 + j1,  3 say LTrim(Str(y))
+         @ 4 + j1, 17 say LTrim(Str(mz))
+         @ 4 + j1, 31 say LTrim(Str(dz))
+         if (klet1 - 544 > 0)
+            @ 4 + j1, 43 say LTrim(Str(klet1 - 544))
+         endif
+         @ 4 + j1, 57 say LTrim(Str(mes))
+         @ 4 + j1, 71 say LTrim(Str(den))
+      next
+      j1:= 0
+      InKey(0)
+      if (LastKey() == K_ESC)
+         exit
+      endif
+      if (LastKey() == K_PGUP)
+         jk:= jk - 1
+         if (jk < 1)
+            jk:= 1
+         endif
+      endif
+      if (LastKey() == K_PGDN)
+         jk:= jk + 1
+         if (jk > jmax)
+            jk:= jmax
+         endif
+      endif
+   next
+   y:= yp
+   return
+
+********************************
+function GETPREVALI(Arg1)
+
+   local Local1, Local2:= .T.
+   if (Arg1:preblock() != Nil)
+      Local1:= Static2
+      Local2:= eval(Arg1:preblock(), Arg1)
+      Arg1:display()
+      showscoreb()
+      Static2:= Local1
+   endif
+   if (Static3)
+      Local2:= .F.
+      Arg1:exitstate(7)
+   elseif (!Local2)
+      Arg1:exitstate(8)
+   else
+      Arg1:exitstate(0)
+   endif
+   return Local2
+
+********************************
+function READVAR(Arg1)
+
+   local Local1:= Static12
+   if (ISCHARACTER(Arg1))
+      Static12:= Arg1
+   endif
+   return Local1
+
+********************************
+procedure PRINTB
+
+   @  5, 10 say "Ï„ØÛß â´˜ ÌØ´âÔï Å´ÎÅ´ØÛß´âÔè"
+   @  7, 10 say "Ï„ØÛß â´˜` ÈùÈÅõ"
+   @  7, 32 say "çÂïÒ"
+   for j:= 1 to 100
+      for kp:= 1 to 100
+         @  7, 28 say LTrim(Str(kp))
+         InKey(0)
+         if (LastKey() = K_ENTER .OR. LastKey() = K_ESC)
+            exit
+         endif
+      next
+      if (LastKey() == K_ESC)
+         exit
+      endif
+      set device to printer
+      a1:= Space(2)
+      a2:= Space(2)
+      a3:= Space(3)
+      select 3
+      use RAFIK
+      j:= 0
+      do while (!EOF())
+         j:= j + 1
+         if (j < 700)
+            tn[j]:= ton
+            prim[j]:= primech
+         endif
+         skip 
+      enddo
+      if (LastKey() != K_ESC)
+         j1:= 1
+         for k:= kp to 100
+            j0:= (k - 1) * 7
+            for j:= 1 to 7
+               jtek:= j + j0
+               ft:= tn[jtek]
+               goto jtek
+               f1:= FieldName(4)
+               f2:= FieldName(5)
+               f3:= FieldName(8)
+               ft1:= SubStr(ft, 1, 36)
+               ft2:= SubStr(ft, 37, 36)
+               ft3:= SubStr(ft, 73, 29)
+               @ j1 + 1,  5 say "    "
+               @ j1 + 1,  5 say LTrim(Str(jtek))
+               @ j1 + 1, 10 say ft1
+               @ j1 + 1, 50 say &f1
+               @ j1 + 1, 60 say &f2
+               @ j1 + 1, 70 say &f3
+               @ j1 + 2, 10 say ft2
+               @ j1 + 3, 10 say ft3
+               j1:= j1 + 3
+            next
+            set device to screen
+            @  6, 10 say "Ï„â¸´˜ üÅÂØÔá çÂè (âëâ Ø·` Èâ£ßâó ESC)"
+            InKey(0)
+            if (LastKey() == K_ESC)
+               exit
+            endif
+            set device to printer
+         next
+      endif
+   next
+   set device to screen
+   return
+
+********************************
+procedure ERRORSYS
+
+   errorblock({|_1| deferror(_1)})
+   return
+
+********************************
+procedure CORRECT
+
+   cor1000[1]:= 0
+   cor1000[2]:= 13.9
+   cor1000[3]:= 27.7
+   cor1000[4]:= 12.1
+   cor1000[5]:= 25.9
+   cor100[1]:= 0
+   cor100[2]:= 4.3
+   cor100[3]:= 8.7
+   cor100[4]:= 13.0
+   cor100[5]:= 17.4
+   cor100[6]:= 21.7
+   cor100[7]:= 26.0
+   cor100[8]:= 0.8
+   cor100[9]:= 5.2
+   cor100[10]:= 9.5
+   cor10[1]:= 0
+   cor10[2]:= 9.3
+   cor10[3]:= 18.6
+   cor10[4]:= 27.9
+   cor10[5]:= 7.6
+   cor10[6]:= 16.9
+   cor10[7]:= 26.2
+   cor10[8]:= 6.0
+   cor10[9]:= 15.3
+   cor10[10]:= 24.6
+   cor01[1]:= 0
+   cor01[2]:= 18.6
+   cor01[3]:= 7.8
+   cor01[4]:= 26.4
+   cor01[5]:= 15.5
+   cor01[6]:= 4.6
+   cor01[7]:= 23.3
+   cor01[8]:= 12.4
+   cor01[9]:= 1.5
+   cor01[10]:= 20.2
+   return
+
+********************************
+static function ERRORMESSA(Arg1)
+
+   local Local1
+   Local1:= iif(Arg1:severity() > 1, "Error ", "Warning ")
+   if (ISCHARACTER(Arg1:subsystem()))
+      Local1:= Local1 + Arg1:subsystem()
+   else
+      Local1:= Local1 + "???"
+   endif
+   if (ISNUMBER(Arg1:subcode()))
+      Local1:= Local1 + ("/" + LTrim(Str(Arg1:subcode())))
+   else
+      Local1:= Local1 + "/???"
+   endif
+   if (ISCHARACTER(Arg1:descriptio()))
+      Local1:= Local1 + ("  " + Arg1:descriptio())
+   endif
+   if (!Empty(Arg1:filename()))
+      Local1:= Local1 + (": " + Arg1:filename())
+   elseif (!Empty(Arg1:operation()))
+      Local1:= Local1 + (": " + Arg1:operation())
+   endif
+   return Local1
+
+********************************
+function __SETHELPK
+
+   set key K_F1 to __xhelp
+   return Nil
+
+********************************
+function __GETPOSTB
+
+   return qself()[4]
+
+********************************
+function __GETPREBL
+
+   return qself()[5]
+
+********************************
+function __GETCARGO
+
+   return qself()[6]
+
+********************************
+function __GETSUBX
+
+   return qself()[2]
+
+********************************
+static function DEFERROR(Arg1)
+
+   local Local1, Local2, Local3, Local4
+   if (Arg1:gencode() == 5)
+      return 0
+   endif
+   if (Arg1:gencode() == 21 .AND. Arg1:oscode() == 32 .AND. ;
+         Arg1:candefault())
+      neterr(.T.)
+      return .F.
+   endif
+   if (Arg1:gencode() == 40 .AND. Arg1:candefault())
+      neterr(.T.)
+      return .F.
+   endif
+   Local2:= errormessa(Arg1)
+   Local3:= {"Quit"}
+   if (Arg1:canretry())
+      AAdd(Local3, "Retry")
+   endif
+   if (Arg1:candefault())
+      AAdd(Local3, "Default")
+   endif
+   Local4:= 0
+   do while (Local4 == 0)
+      if (Empty(Arg1:oscode()))
+         Local4:= alert(Local2, Local3)
+      else
+         Local4:= alert(Local2 + ";(DOS Error " + ;
+            LTrim(Str(Arg1:oscode())) + ")", Local3)
+      endif
+      if (ISNIL(Local4))
+         exit
+      endif
+   enddo
+   if (!Empty(Local4))
+      if (Local3[Local4] == "Break")
+         break(Arg1)
+      elseif (Local3[Local4] == "Retry")
+         return .T.
+      elseif (Local3[Local4] == "Default")
+         return .F.
+      endif
+   endif
+   if (!Empty(Arg1:oscode()))
+      Local2:= Local2 + (" (DOS Error " + LTrim(Str(Arg1:oscode())) ;
+         + ") ")
+   endif
+   outerr(Chr(13) + Chr(10))
+   outerr(Local2)
+   Local1:= 2
+   do while (!Empty(procname(Local1)))
+      outerr(Chr(13) + Chr(10))
+      outerr("Called from", Trim(procname(Local1)) + "(" + ;
+         LTrim(Str(procline(Local1))) + ")  ")
+      Local1++
+   enddo
+   errorlevel(1)
+   quit
+   return .F.
+
+********************************
+procedure GETDOSETKE(Arg1, Arg2)
+
+   local Local1
+   if (Arg2:changed())
+      Arg2:assign()
+      Static2:= .T.
+   endif
+   Local1:= Static2
+   eval(Arg1, Static9, Static10, readvar())
+   showscoreb()
+   Arg2:updatebuff()
+   Static2:= Local1
+   if (Static3)
+      Arg2:exitstate(7)
+   endif
+   return
+
+********************************
+static function SETTLE(Arg1, Arg2)
+
+   local Local1
+   if (Arg2 == 0)
+      Local1:= 2
+   else
+      Local1:= Arg1[Arg2]:exitstate()
+   endif
+   if (Local1 == 7 .OR. Local1 == 6)
+      return 0
+   endif
+   if (Local1 != 8)
+      Static7:= Arg2
+      Static4:= .F.
+      Static5:= .F.
+   else
+      Local1:= Static6
+   endif
+   do case
+   case Local1 == 1
+      Arg2--
+   case Local1 == 2
+      Arg2++
+   case Local1 == 3
+      Arg2:= 1
+      Static4:= .T.
+      Local1:= 2
+   case Local1 == 4
+      Arg2:= Len(Arg1)
+      Static5:= .T.
+      Local1:= 1
+   case Local1 == 5
+      Arg2++
+   endcase
+   if (Arg2 == 0)
+      if (!readexit() .AND. !Static5)
+         Static4:= .T.
+         Arg2:= Static7
+         Local1:= 2
+      endif
+   elseif (Arg2 == Len(Arg1) + 1)
+      if (!readexit() .AND. Local1 != 5 .AND. !Static4)
+         Static5:= .T.
+         Arg2:= Static7
+         Local1:= 1
+      else
+         Arg2:= 0
+      endif
+   endif
+   Static6:= Local1
+   if (Arg2 != 0)
+      Arg1[Arg2]:exitstate(Local1)
+   endif
+   return Arg2
+
+********************************
+procedure GETAPPLYKE(Arg1, Arg2)
+
+   local Local1, Local2
+   if ((Local2:= SetKey(Arg2)) != Nil)
+      getdosetke(Local2, Arg1)
+   else
+      do case
+      case Arg2 == 5
+         Arg1:exitstate(1)
+      case Arg2 == 271
+         Arg1:exitstate(1)
+      case Arg2 == 24
+         Arg1:exitstate(2)
+      case Arg2 == 9
+         Arg1:exitstate(2)
+      case Arg2 == 13
+         Arg1:exitstate(5)
+      case Arg2 == 27
+         if (Set(_SET_ESCAPE))
+            Arg1:undo()
+            Arg1:exitstate(7)
+         endif
+      case Arg2 == 18
+         Arg1:exitstate(6)
+      case Arg2 == 3
+         Arg1:exitstate(6)
+      case Arg2 == 29
+         Arg1:exitstate(3)
+      case Arg2 == 23
+         Arg1:exitstate(6)
+      case Arg2 == 22
+         Set(_SET_INSERT, !Set(_SET_INSERT))
+         showscoreb()
+      case Arg2 == 21
+         Arg1:undo()
+      case Arg2 == 1
+         Arg1:home()
+      case Arg2 == 6
+         Arg1:end()
+      case Arg2 == 4
+         Arg1:right()
+      case Arg2 == 19
+         Arg1:left()
+      case Arg2 == 2
+         Arg1:wordright()
+      case Arg2 == 26
+         Arg1:wordleft()
+      case Arg2 == 8
+         Arg1:backspace()
+      case Arg2 == 7
+         Arg1:delete()
+      case Arg2 == 20
+         Arg1:delwordrig()
+      case Arg2 == 25
+         Arg1:delend()
+      case Arg2 == 127
+         Arg1:delwordlef()
+      otherwise
+         if (Arg2 >= 32 .AND. Arg2 <= 255)
+            Local1:= Chr(Arg2)
+            if (Arg1:type() == "N" .AND. (Local1 == "." .OR. Local1 ;
+                  == ","))
+               Arg1:todecpos()
+            else
+               if (Set(_SET_INSERT))
+                  Arg1:insert(Local1)
+               else
+                  Arg1:overstrike(Local1)
+               endif
+               if (Arg1:typeout() .AND. !Set(_SET_CONFIRM))
+                  if (Set(_SET_BELL))
+                     ?? ""
+                  endif
+                  Arg1:exitstate(5)
+               endif
+            endif
+         endif
+      endcase
+      return
+   endif
+
+********************************
+function GETPOSTVAL(Arg1)
+
+   local Local1, Local2, Local3:= .T.
+   if (Arg1:exitstate() == 7)
+      return .T.
+   endif
+   if (Arg1:baddate())
+      Arg1:home()
+      datemsg()
+      showscoreb()
+      return .F.
+   endif
+   if (Arg1:changed())
+      Arg1:assign()
+      Static2:= .T.
+   endif
+   Arg1:reset()
+   if (Arg1:postblock() != Nil)
+      Local1:= Static2
+      SetPos(Arg1:row(), Arg1:col() + Len(Arg1:buffer()))
+      Local3:= eval(Arg1:postblock(), Arg1)
+      SetPos(Arg1:row(), Arg1:col())
+      showscoreb()
+      Arg1:updatebuff()
+      Static2:= Local1
+      if (Static3)
+         Arg1:exitstate(7)
+         Local3:= .T.
+      endif
+   endif
+   return Local3
+
+********************************
+static procedure POSTACTIVE(Arg1)
+
+   getactive(Arg1)
+   readvar(getreadvar(Arg1))
+   showscoreb()
+   return
+
+********************************
+static function CLEARGETSY
+
+   local Local1[9]
+   Local1[1]:= Static3
+   Static3:= .F.
+   Local1[2]:= Static4
+   Static4:= .F.
+   Local1[3]:= Static5
+   Static5:= .F.
+   Local1[4]:= Static6
+   Static6:= 0
+   Local1[5]:= Static7
+   Static7:= 0
+   Local1[6]:= getactive(Nil)
+   Local1[7]:= readvar("")
+   Local1[8]:= Static9
+   Static9:= ""
+   Local1[9]:= Static10
+   Static10:= 0
+   Static2:= .F.
+   return Local1
+
+********************************
+static procedure RESTOREGET(Arg1)
+
+   Static3:= Arg1[1]
+   Static4:= Arg1[2]
+   Static5:= Arg1[3]
+   Static6:= Arg1[4]
+   Static7:= Arg1[5]
+   getactive(Arg1[6])
+   readvar(Arg1[7])
+   Static9:= Arg1[8]
+   Static10:= Arg1[9]
+   return
+
+********************************
+static function GETREADVAR(Arg1)
+
+   local Local1:= Upper(Arg1:name()), Local2
+   if (Arg1:subscript() != Nil)
+      for Local2:= 1 to Len(Arg1:subscript())
+         Local1:= Local1 + ("[" + ;
+            LTrim(Str(Arg1:subscript()[Local2])) + "]")
+      next
+   endif
+   return Local1
+
+********************************
+static procedure SHOWSCOREB
+
+   local Local1, Local2
+   if (Set(_SET_SCOREBOARD))
+      Local1:= Row()
+      Local2:= Col()
+      SetPos(0, 60)
+      dispout(iif(Set(_SET_INSERT), "Ins", "   "))
+      SetPos(Local1, Local2)
+   endif
+   return
+
+********************************
+static procedure DATEMSG
+
+   local Local1, Local2
+   if (Set(_SET_SCOREBOARD))
+      Local1:= Row()
+      Local2:= Col()
+      SetPos(0, 60)
+      dispout("Invalid Date")
+      SetPos(Local1, Local2)
+      do while (nextkey() == 0)
+      enddo
+      SetPos(0, 60)
+      dispout("            ")
+      SetPos(Local1, Local2)
+   endif
+   return
+
+********************************
+function RANGECHECK(Arg1, Arg2, Arg3, Arg4)
+
+   local Local1, Local2, Local3, Local4
+   if (!Arg1:changed())
+      return .T.
+   endif
+   Local4:= Arg1:varget()
+   if (Local4 >= Arg3 .AND. Local4 <= Arg4)
+      return .T.
+   endif
+   if (Set(_SET_SCOREBOARD))
+      Local1:= "Range: " + LTrim(Transform(Arg3, "")) + " - " + ;
+         LTrim(Transform(Arg4, ""))
+      if (Len(Local1) > MaxCol())
+         Local1:= SubStr(Local1, 1, MaxCol())
+      endif
+      Local2:= Row()
+      Local3:= Col()
+      SetPos(0, Min(60, MaxCol() - Len(Local1)))
+      dispout(Local1)
+      SetPos(Local2, Local3)
+      do while (nextkey() == 0)
+      enddo
+      SetPos(0, Min(60, MaxCol() - Len(Local1)))
+      dispout(Space(Len(Local1)))
+      SetPos(Local2, Local3)
+   endif
+   return .F.
+
+********************************
+function __ATPROMPT(Arg1, Arg2, Arg3, Arg4)
+
+   AAdd(Static11, {Arg1, Arg2, Arg3, Arg4})
+   SetPos(Arg1, Arg2)
+   dispout(Arg3)
+   return .F.
+
+********************************
+function __MENUTO(Arg1, Arg2)
+
+   local Local1, Local2, Local3, Local4, Local5, Local6, Local7, ;
+      Local8, Local9, Local10, Local11, Local12, Local13:= Static11, ;
+      Local14:= Set(_SET_MESSAGE), Local15:= Set(_SET_MCENTER), ;
+      Local16:= readvar(Upper(Arg2))
+   Static11:= {}
+   Local11:= errorblock({|_1| break(_1)})
+   begin sequence
+      Local2:= eval(Arg1)
+      Local12:= .F.
+   recover
+      Local12:= .T.
+   end sequence
+   errorblock(Local11)
+   if (Local12)
+      __qqpub(Arg2)
+   endif
+   if (ValType(Local2) != "N" .OR. Local2 < 1)
+      Local2:= 1
+   endif
+   if (Local2 > Len(Local13))
+      Local2:= Len(Local13)
+   endif
+   if (Set(_SET_INTENSITY))
+      Local8:= setcursor(0)
+   endif
+   Local7:= .F.
+   Local6:= ""
+   Local9:= 0
+   do while (Local2 != 0)
+      Local1:= Local13[Local2]
+      if (Set(_SET_INTENSITY))
+         __color(1)
+      endif
+      SetPos(Local1[1], Local1[2])
+      dispout(Local1[3])
+      if (Set(_SET_INTENSITY))
+         __color(0)
+      endif
+      if (Local14 != 0)
+         if (!Empty(Local6))
+            SetPos(Local14, Local9)
+            dispout(Space(Len(Local6)))
+         endif
+         Local6:= Local1[4]
+         if (ISBLOCK(Local6))
+            Local6:= eval(Local6)
+         elseif (ValType(Local6) == "U")
+            Local6:= ""
+         endif
+         if (Local15)
+            Local9:= Int((MaxCol() - Len(Local6)) / 2)
+         endif
+         SetPos(Local14, Local9)
+         dispout(Local6)
+         SetPos(Local1[1], Local1[2])
+      endif
+      if (Local7)
+         exit
+      endif
+      Local5:= InKey(0)
+      if ((Local10:= SetKey(Local5)) != Nil)
+         eval(Arg1, Local2)
+         eval(Local10, procname(1), procline(1), Upper(Arg2))
+         Local2:= eval(Arg1)
+         Local5:= 0
+      endif
+      if (Local2 > Len(Local13))
+         Local2:= Len(Local13)
+      endif
+      do case
+      case Local5 == 5 .OR. Local5 == 19
+         if (--Local2 < 1)
+            Local2:= iif(Set(_SET_WRAP), Len(Local13), 1)
+         endif
+      case Local5 == 24 .OR. Local5 == 4
+         if (++Local2 > Len(Local13))
+            Local2:= iif(Set(_SET_WRAP), 1, Len(Local13))
+         endif
+      case Local5 == 1
+         Local2:= 1
+      case Local5 == 6
+         Local2:= Len(Local13)
+      case Local5 == 18
+         Local7:= .T.
+      case Local5 == 3
+         Local7:= .T.
+      case Local5 == 13
+         Local7:= .T.
+      case Local5 == 27
+         Local2:= 0
+      otherwise
+         Local4:= Upper(Chr(Local5))
+         Local3:= ascan(Local13, {|_1| Local4 == ;
+            Left(Upper(LTrim(_1[3])), 1)})
+         if (Local3 != 0)
+            Local2:= Local3
+            Local7:= .T.
+         endif
+      endcase
+      if (Local2 != 0)
+         SetPos(Local1[1], Local1[2])
+         dispout(Local1[3])
+      endif
+   enddo
+   setcursor(Local8)
+   eval(Arg1, Local2)
+   if (Local12)
+      release (Arg2)
+   endif
+   if (!Empty(Local16))
+      readvar(Local16)
+   endif
+   SetPos(MaxRow() - 1, 0)
+   return Local2
+
+* EOF
