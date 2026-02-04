@@ -23,3 +23,6 @@ The **Tomarakan** method is based on the cyclical nature of the Armenian movable
 
 ## ⚖️ License
 Proprietary - Tomarakan Systems Consulting
+
+version 0
+2/4/2026
